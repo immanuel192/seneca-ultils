@@ -1,0 +1,12 @@
+sudo: false
+language: node_js
+node_js:
+  - node
+  - '7'
+before_script:
+- npm install -g istanbul codeclimate-test-reporter
+after_script:
+- codeclimate-test-reporter < coverage/lcov.info
+addons:
+  code_climate:
+    repo_token: f2af390836a76e9b57b192d7cae4557d7bbebe4f8c644f23dbaf8bbf3a963e23
