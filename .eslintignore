@@ -1,0 +1,7 @@
+typings/**
+coverage/**
+node_modules/**
+doc/**
+apidoc/**
+public/**
+.vscode/**

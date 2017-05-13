@@ -1,0 +1,32 @@
+{
+  "name": "seneca-ultils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run eslint && npm run mocha",
+    "mocha": "./node_modules/.bin/mocha",
+    "eslint": "./node_modules/.bin/eslint .",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://immanuel192@github.com/immanuel192/seneca-ultils.git"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "seneca": "^3.3.0",
+    "seneca-amqp-transport": "^2.1.0",
+    "seneca-fire-and-forget": "^1.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/immanuel192/seneca-ultils/issues"
+  },
+  "homepage": "https://github.com/immanuel192/seneca-ultils#readme",
+  "devDependencies": {
+    "sinon": "^2.2.0"
+  }
+}
