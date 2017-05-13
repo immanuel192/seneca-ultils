@@ -1,7 +1,7 @@
 {
   "name": "seneca-ultils",
   "version": "1.0.0",
-  "description": "",
+  "description": "Seneca Service Loader to help you easily buiild seneca service",
   "main": "index.js",
   "scripts": {
     "test": "npm run eslint && npm run mocha",
@@ -19,14 +19,25 @@
     "seneca-amqp-transport": "^2.1.0",
     "seneca-fire-and-forget": "^1.0.0"
   },
+  "engines": {
+    "node": ">=7.3.0"
+  },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Trung Dang",
+    "email": "trungdt@absoft.vn",
+    "url": "http://absoft.vn"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/immanuel192/seneca-ultils/issues"
   },
   "homepage": "https://github.com/immanuel192/seneca-ultils#readme",
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-import": "^2.2.0",
+    "mocha": "^3.3.0",
     "sinon": "^2.2.0"
   }
 }

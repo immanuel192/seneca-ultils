@@ -57,12 +57,19 @@ describe('#MemStore - DI', () => {
     });
 
     describe('remove', () => {
-        it('should remove key', () => {
+        it('should return true if remove existing key', () => {
             const actualInp = 123;
             const key = 'myKey123';
             kv.register(key, actualInp);
-            kv.remove(key);
+            const res = kv.remove(key);
             assert.strictEqual(kv.resolve(key), undefined);
+            assert.equal(res, true);
+        });
+
+        it('should return null if remove non-exist key', () => {
+            const key = 'myKey12343242342';
+            const res = kv.remove(key);
+            assert.strictEqual(res, null);
         });
     });
 });

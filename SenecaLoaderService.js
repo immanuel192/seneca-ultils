@@ -6,7 +6,6 @@ const TRANSPORT_AMQP = 'amqp';
 const promisify = require('./lib/promisify');
 const Seneca = require('seneca');
 const MemStore = require('./lib/MemStore');
-// const CommandLoader = require('./commands');
 const CommandWrapper = require('./lib/commandWrapper');
 const errorHandler = require('./lib/exceptionHandler');
 const TransportAmqp = require('./lib/amqpTransport');
@@ -39,18 +38,16 @@ class SenecaLoaderService {
             && Object.prototype.hasOwnProperty.call(args[0], 'pin')
             && Object.prototype.hasOwnProperty.call(args[0], 'Func')
             && typeof (args[0].Func) === 'function') {
-            return this.loadCommand(args[0].pin, args[0].Func);
+            return this.loadCommand(args[0].pin, args[0].Func, args[0].name);
         }
         else if (args.length === 3 && typeof args[1] === 'function') {
             const serviceInstance = new args[1]();
             this.seneca.add(args[0], CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance)));
             this.logger.info(`Loaded command ${args[2]}`);
-        }
-        else {
-            throw new Error('Can not load command');
-        }
 
-        return null;
+            return true;
+        }
+        return false;
     }
 
     listen() {

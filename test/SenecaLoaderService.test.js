@@ -30,6 +30,13 @@ const MemStoreFake = {
 const FakeLogger = {
     info: sandbox.spy()
 };
+const FakeCommand = {
+    pin: 'cmd:myCommand',
+    Func: function myCommand() {
+        this.func = sinon.spy();
+    },
+    name: 'myCommand'
+};
 let serviceInstance;
 
 describe('SenecaHelperService', () => {
@@ -115,6 +122,27 @@ describe('SenecaHelperService', () => {
                 .then((c) => {
                     assert.equal(c.pin, pin);
                 });
+        });
+    });
+
+    describe('loadCommand', () => {
+        it('should return false when could not load command', () => {
+            const res = serviceInstance.loadCommand();
+            assert.equal(res, false);
+        });
+
+        it('shoud load command', () => {
+            seneca.add.reset();
+            FakeLogger.info.reset();
+            const res = serviceInstance.loadCommand(FakeCommand.pin, FakeCommand.Func, FakeCommand.name);
+            assert.equal(seneca.add.called, true);
+            assert.equal(FakeLogger.info.called, true);
+            assert.equal(res, true);
+        });
+
+        it('should return true when load command as object', () => {
+            const res = serviceInstance.loadCommand(FakeCommand);
+            assert.equal(res, true);
         });
     });
 });
