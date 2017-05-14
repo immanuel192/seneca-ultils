@@ -1,5 +1,5 @@
 {
-  "name": "seneca-ultils",
+  "name": "seneca-utils",
   "version": "1.0.0",
   "description": "Seneca Service Loader to help you easily buiild seneca service",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://immanuel192@github.com/immanuel192/seneca-ultils.git"
+    "url": "git+https://immanuel192@github.com/immanuel192/seneca-utils.git"
   },
   "dependencies": {
     "lodash": "^4.17.4",
@@ -30,9 +30,9 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/immanuel192/seneca-ultils/issues"
+    "url": "https://github.com/immanuel192/seneca-utils/issues"
   },
-  "homepage": "https://github.com/immanuel192/seneca-ultils#readme",
+  "homepage": "https://github.com/immanuel192/seneca-utils#readme",
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",
