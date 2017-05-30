@@ -15,6 +15,15 @@ const commandFunc = function (inp, done) {
     if (inp.returnException) {
         return done(new Error('returnException as requested'));
     }
+
+    if (inp.resolvePromise) {
+        return Promise.resolve('123');
+    }
+
+    if (inp.resolveValue) {
+        return '123';
+    }
+
     return done(null, {});
 };
 let testCommand;
@@ -67,6 +76,30 @@ describe('Seneca - commandWrapper', () => {
         }, (err, data) => {
             assert.equal(data.success, false);
             assert.equal(data.data, 'returnException as requested');
+            done();
+        });
+    });
+
+    it('should resolve if function return a value directly', (done) => {
+        const expectResult = '123';
+        testCommand({
+            resolveValue: true
+        }, (err, data) => {
+            assert.equal(data.success, true);
+            assert.equal(data.data, expectResult);
+            done();
+
+            return 123;
+        });
+    });
+
+    it('should resolve if function return a promise', (done) => {
+        const expectResult = '123';
+        testCommand({
+            resolvePromise: true
+        }, (err, data) => {
+            assert.equal(data.success, true);
+            assert.equal(data.data, expectResult);
             done();
         });
     });
