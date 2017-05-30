@@ -20,8 +20,16 @@ const commandFunc = function (inp, done) {
         return Promise.resolve('123');
     }
 
+    if (inp.rejectPromise) {
+        return Promise.reject('123');
+    }
+
     if (inp.resolveValue) {
         return '123';
+    }
+
+    if (inp.throwException) {
+        throw new Error('fake error');
     }
 
     return done(null, {});
@@ -99,6 +107,28 @@ describe('Seneca - commandWrapper', () => {
             resolvePromise: true
         }, (err, data) => {
             assert.equal(data.success, true);
+            assert.equal(data.data, expectResult);
+            done();
+        });
+    });
+
+    it('should reject if function return a rejected promise', (done) => {
+        const expectResult = '123';
+        testCommand({
+            rejectPromise: true
+        }, (err, data) => {
+            assert.equal(data.success, false);
+            assert.equal(data.data, expectResult);
+            done();
+        });
+    });
+
+    it('should auto catch error in case of exception', (done) => {
+        const expectResult = 'fake error';
+        testCommand({
+            throwException: true
+        }, (err, data) => {
+            assert.equal(data.success, false);
             assert.equal(data.data, expectResult);
             done();
         });
