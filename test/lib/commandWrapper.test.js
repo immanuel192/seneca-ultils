@@ -54,12 +54,14 @@ const commandFunc = function (inp, done) {
 };
 let testCommand;
 let testCommandWithDto;
+let testCommandWithWrongDto;
 
 describe('Seneca - commandWrapper', () => {
     before(() => {
         commandWrapper.setDependencies(testLogger);
         testCommand = commandWrapper('test-command', commandFunc);
         testCommandWithDto = commandWrapper('test-command', commandFunc, 'MyDto');
+        testCommandWithWrongDto = commandWrapper('test-command', commandFunc, 'MyWrongDto');
         kv.registerDto('MyDto', '', MyDto);
     });
 
@@ -162,6 +164,17 @@ describe('Seneca - commandWrapper', () => {
                 DtoFieldOnly: expectResult
             }, (err, data) => {
                 assert.equal(data.success, true);
+                assert.equal(data.data, expectResult);
+                done();
+            });
+        });
+
+        it('should throw exception when Dto is not found', (done) => {
+            const expectResult = 'Dto MyWrongDto is not found';
+            testCommandWithWrongDto({
+                DtoFieldOnly: expectResult
+            }, (err, data) => {
+                assert.equal(data.success, false);
                 assert.equal(data.data, expectResult);
                 done();
             });

@@ -4,19 +4,38 @@
 [![Code Climate](https://codeclimate.com/github/immanuel192/seneca-utils.png)](https://codeclimate.com/github/immanuel192/seneca-utils)
 [![Test Coverage](https://codeclimate.com/github/immanuel192/seneca-utils/badges/coverage.svg)](https://codeclimate.com/github/immanuel192/seneca-utils/coverage)
 [![Dependency Status](https://david-dm.org/immanuel192/seneca-utils.png)](https://david-dm.org/immanuel192/seneca-utils)
-[![Download Status](https://img.shields.io/npm/immanuel192/seneca-utils.svg?style=flat-square)](https://www.npmjs.com/package/seneca-utils)
 
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
-### v1.0.3
-- Add Dto support. Now when exporting your command, add dto type and subtype
+### v1.0.4
+- Add Dto support. Now when exporting your command, add dto type and subtype. Both are optional
+
 ```javascript
+class MyCommand {
+    constructor() {
+        this.SampleLogic = kv.resolve('SampleLogic');
+        this.logger = kv.resolve('logger');
+    }
+
+    get dtoType() {
+        return 'MyDto';
+    }
+
+    get dtoSubType() {
+        return '';
+    }
+
+    func(inp) {
+        return this.SampleLogic.doSomething(inp);
+    }
+}
+
 module.exports = {
-    pin: 'cmd:test',
-    Func: CommandTest,
-    name: 'test',
-    dtoType: '', // your dto main type
-    dtoSubType: '' // your dto sub type
+    pin: 'cmd:myCommand',
+    Func: MyCommand,
+    name: 'myCommand'
 };
 ```
+
+- Throw exception when can not detect the Dto registered
