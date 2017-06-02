@@ -42,7 +42,7 @@ class SenecaLoaderService {
         }
         else if (args.length === 3 && typeof args[1] === 'function') {
             const serviceInstance = new args[1]();
-            this.seneca.add(args[0], CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance), serviceInstance.dto));
+            this.seneca.add(args[0], CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance), serviceInstance.dtoType, serviceInstance.dtoSubType));
             this.logger.info(`Loaded command ${args[2]}`);
 
             return true;
