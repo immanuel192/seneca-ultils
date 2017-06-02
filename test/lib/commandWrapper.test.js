@@ -2,11 +2,24 @@
 const commandWrapper = require('../../lib/commandWrapper');
 const sinon = require('sinon');
 const assert = require('assert');
+const { kv, BaseDto } = require('dtobase');
 
 const testLogger = {
     info: sinon.spy(),
     error: sinon.spy()
 };
+
+class MyDto extends BaseDto {
+    constructor() {
+        super(false);
+        this.schema({
+            DtoFieldOnly: {
+                type: String
+            }
+        });
+    }
+}
+
 const commandFunc = function (inp, done) {
     if (inp.returnError) {
         return done('returnError as requested');
@@ -32,14 +45,22 @@ const commandFunc = function (inp, done) {
         throw new Error('fake error');
     }
 
+    // for dto
+    if (inp.DtoFieldOnly && inp.DtoFieldOnly) {
+        return inp.DtoFieldOnly;
+    }
+
     return done(null, {});
 };
 let testCommand;
+let testCommandWithDto;
 
 describe('Seneca - commandWrapper', () => {
     before(() => {
         commandWrapper.setDependencies(testLogger);
         testCommand = commandWrapper('test-command', commandFunc);
+        testCommandWithDto = commandWrapper('test-command', commandFunc, 'MyDto');
+        kv.registerDto('MyDto', '', MyDto);
     });
 
     it('should run the command sucessfully', (done) => {
@@ -131,6 +152,19 @@ describe('Seneca - commandWrapper', () => {
             assert.equal(data.success, false);
             assert.equal(data.data, expectResult);
             done();
+        });
+    });
+
+    context('With Dto', () => {
+        it('should resolve the Dto and pass to command function', (done) => {
+            const expectResult = '123';
+            testCommandWithDto({
+                DtoFieldOnly: expectResult
+            }, (err, data) => {
+                assert.equal(data.success, true);
+                assert.equal(data.data, expectResult);
+                done();
+            });
         });
     });
 });
