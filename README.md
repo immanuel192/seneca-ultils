@@ -8,6 +8,9 @@
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
+### v1.0.5
+- Update dtobase to 1.0.1
+
 ### v1.0.4
 - Add Dto support. Now when exporting your command, add dto type and subtype. Both are optional
 
