@@ -1,6 +1,6 @@
 {
   "name": "seneca-utils",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Seneca Service Loader to help you easily buiild seneca service",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "dtobase": "^1.0.1",
+    "jsonic": "^0.3.0",
     "lodash": "^4.17.4",
     "seneca": "^3.3.0",
     "seneca-amqp-transport": "^2.1.0",

@@ -1,6 +1,7 @@
 'use strict';
 const assert = require('assert');
 const sinon = require('sinon');
+const _ = require('lodash');
 const ChatService = require('../SenecaLoaderService');
 
 const config = {
@@ -148,8 +149,13 @@ describe('SenecaHelperService', () => {
         it('shoud load command', () => {
             seneca.add.reset();
             FakeLogger.info.reset();
+            const expectCalledWith = {
+                service: 'chat',
+                cmd: 'myCommand'
+            };
             const res = serviceInstance.loadCommand(FakeCommand.pin, FakeCommand.Func, FakeCommand.name);
             assert.equal(seneca.add.called, true);
+            assert.equal(_.isEqual(seneca.add.args[0][0], expectCalledWith), true);
             assert.equal(FakeLogger.info.called, true);
             assert.equal(res, true);
         });

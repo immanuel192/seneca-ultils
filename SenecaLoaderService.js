@@ -6,6 +6,7 @@ const TRANSPORT_AMQP = 'amqp';
 const promisify = require('./lib/promisify');
 const Seneca = require('seneca');
 const MemStore = require('./lib/MemStore');
+const MergePin = require('./lib/pin');
 const CommandWrapper = require('./lib/commandWrapper');
 const errorHandler = require('./lib/exceptionHandler');
 const TransportAmqp = require('./lib/amqpTransport');
@@ -52,7 +53,7 @@ class SenecaLoaderService {
             const CommandClass = args[1];
             const serviceInstance = new CommandClass();
 
-            this.seneca.add(args[0], CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance), CommandClass.dtoType, CommandClass.dtoSubType));
+            this.seneca.add(MergePin(this.config.pin, args[0]), CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance), CommandClass.dtoType, CommandClass.dtoSubType));
             this.logger.info(`Loaded command ${args[2]}`);
 
             return true;

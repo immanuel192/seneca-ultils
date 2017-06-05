@@ -8,6 +8,8 @@
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
+### v1.1.0
+- Fix bug: register seneca command without the server listen pin config.
 ### v1.0.6
 - Add new way to declare the command
 ```javascript
