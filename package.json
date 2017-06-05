@@ -1,6 +1,6 @@
 {
   "name": "seneca-utils",
-  "version": "1.0.6.1",
+  "version": "1.0.7",
   "description": "Seneca Service Loader to help you easily buiild seneca service",
   "main": "index.js",
   "scripts": {
