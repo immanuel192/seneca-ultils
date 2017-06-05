@@ -37,6 +37,20 @@ const FakeCommand = {
     },
     name: 'myCommand'
 };
+
+const FakeCommand2 = class {
+    static get pin() {
+        return 'cmd:myCommand2';
+    }
+
+    static get name() {
+        return 'myCommand2';
+    }
+
+    func() {
+        return null;
+    }
+};
 let serviceInstance;
 
 describe('SenecaHelperService', () => {
@@ -142,6 +156,11 @@ describe('SenecaHelperService', () => {
 
         it('should return true when load command as object', () => {
             const res = serviceInstance.loadCommand(FakeCommand);
+            assert.equal(res, true);
+        });
+
+        it('should return true when load command as a class', () => {
+            const res = serviceInstance.loadCommand(FakeCommand2);
             assert.equal(res, true);
         });
     });

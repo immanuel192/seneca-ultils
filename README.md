@@ -8,6 +8,23 @@
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
+### v1.0.6
+- Add new way to declare the command
+```javascript
+const FakeCommand2 = class {
+    static get pin() {
+        return 'cmd:myCommand2';
+    }
+
+    static get name() {
+        return 'myCommand2';
+    }
+
+    func() {
+        return null;
+    }
+};
+```
 ### v1.0.5
 - Update dtobase to 1.0.1
 

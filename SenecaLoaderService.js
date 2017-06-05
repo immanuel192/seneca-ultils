@@ -40,6 +40,13 @@ class SenecaLoaderService {
             && typeof (args[0].Func) === 'function') {
             return this.loadCommand(args[0].pin, args[0].Func, args[0].name);
         }
+        else if (
+            args.length === 1
+            && typeof args[0] === 'function'
+            && Object.prototype.hasOwnProperty.call(args[0], 'pin')
+            && Object.prototype.hasOwnProperty.call(args[0], 'name')) {
+            return this.loadCommand(args[0].pin, args[0], args[0].name);
+        }
         else if (args.length === 3 && typeof args[1] === 'function') {
             const serviceInstance = new args[1]();
             this.seneca.add(args[0], CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance), serviceInstance.dtoType, serviceInstance.dtoSubType));
