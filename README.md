@@ -20,10 +20,20 @@ const FakeCommand2 = class {
         return 'myCommand2';
     }
 
+    static get dtoType() {
+        return 'MyDto';
+    }
+
+    static get dtoSubType() {
+        return '';
+    }
+
     func() {
         return null;
     }
 };
+
+module.exports = FakeCommand2;
 ```
 ### v1.0.5
 - Update dtobase to 1.0.1
