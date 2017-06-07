@@ -99,6 +99,7 @@ class SenecaLoaderService {
         const existClient = !!client;
 
         if (!existClient) {
+            initSeneca(this.seneca, this.logger);
             if (this.config.transport === TRANSPORT_AMQP) {
                 const transportWrapper = new TransportAmqp(this.seneca, this.config);
                 transportWrapper.configure();
