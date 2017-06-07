@@ -14,6 +14,10 @@ const TransportAmqp = require('./lib/amqpTransport');
 let kv;
 
 function initSeneca(seneca, logger) {
+    if (seneca._init) {
+        return;
+    }
+    seneca._init = true;
     seneca.use('fire-and-forget');
     promisify.apply(seneca);
     errorHandler.call(null, seneca, logger);

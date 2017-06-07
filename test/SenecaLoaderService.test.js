@@ -62,6 +62,7 @@ describe('SenecaHelperService', () => {
 
     afterEach(() => {
         sandbox.reset();
+        seneca._init = false;
     });
 
     describe('close', () => {
