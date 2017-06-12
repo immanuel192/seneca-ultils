@@ -8,6 +8,8 @@
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
+### v1.1.5
+- Fix bug: get clientAsync got no response because the seneca queue still full
 ### v1.1.1
 - Fix bug: when you dont listen but you spaw a client, your client never get promisify
 ### v1.1.0

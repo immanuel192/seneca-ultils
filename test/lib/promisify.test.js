@@ -5,6 +5,7 @@ const assert = require('assert');
 
 const seneca = new (function seneca() {
     this.client = sinon.spy();
+    this.ready = sinon.spy(callback => callback());
 })();
 
 describe('Seneca - Promisify', () => {
@@ -183,52 +184,14 @@ describe('Seneca - Promisify', () => {
     });
 
     describe('clientAsync', () => {
-        it('should call function readyAsync when invoked', () => {
-            const save = sinon.stub(seneca, 'readyAsync').returns({
-                then() {
-                    return Promise.resolve();
-                }
-            });
-            return seneca.clientAsync({})
-                .then(() => {
-                    assert.equal(seneca.readyAsync.called, true);
-                    save.restore();
-                });
-        });
-
         it('should call function client when invoked', () => {
-            const save = sinon.stub(seneca, 'readyAsync').returns({
-                then(callback) {
-                    return callback(seneca);
-                }
-            });
-
             seneca.client.reset();
-
-            return seneca.clientAsync({})
-                .then(() => {
-                    assert.equal(seneca.client.called, true);
-                    save.restore();
-                });
-        });
-
-        it('should call function client when invoked', () => {
-            seneca.ready = sinon.spy((done) => {
-                done(null);
-            });
-            const save = sinon.stub(seneca, 'readyAsync').returns({
-                then(callback) {
-                    return callback(seneca);
-                }
-            });
-
-            seneca.client.reset();
+            seneca.ready.reset();
 
             return seneca.clientAsync({})
                 .then(() => {
                     assert.equal(seneca.client.called, true);
                     assert.equal(seneca.ready.called, true);
-                    save.restore();
                 });
         });
 
@@ -236,11 +199,6 @@ describe('Seneca - Promisify', () => {
             const expectErorr = '123';
             seneca.ready = sinon.spy((done) => {
                 done(expectErorr);
-            });
-            const save = sinon.stub(seneca, 'readyAsync').returns({
-                then(callback) {
-                    return callback(seneca);
-                }
             });
 
             seneca.client.reset();
@@ -251,7 +209,6 @@ describe('Seneca - Promisify', () => {
                 })
                 .catch((err) => {
                     assert.equal(err, expectErorr);
-                    save.restore();
                 });
         });
     });
