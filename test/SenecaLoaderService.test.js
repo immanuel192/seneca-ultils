@@ -101,17 +101,20 @@ describe('SenecaHelperService', () => {
             assert.equal(seneca.use.firstCall.calledWith('fire-and-forget'), true);
         });
 
-        it('should ignore to load fire-and-forget, promisify if flag _init is true', () => {
+        it('should ignore to load fire-and-forget, promisify if already loaded', () => {
             const testConfig = {
                 pin: 'service:chat',
                 transport: '',
                 printInfo: false
             };
-            seneca._init = true;
+            seneca.private$ = {
+                exports: {
+                    'fire-and-forget': {}
+                }
+            };
             const testInstance = new ChatService(seneca, testConfig, MemStoreFake);
             testInstance.listen();
             assert.equal(seneca.use.callCount, 0);
-            seneca._init = false;
         });
     });
 

@@ -8,6 +8,8 @@
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
+### v1.1.7
+- Fix bug SenecaLoaderService throw exception because load fire-and-forget 2 times
 ### v1.1.5
 - Fix bug: get clientAsync got no response because the seneca queue still full
 ### v1.1.1
