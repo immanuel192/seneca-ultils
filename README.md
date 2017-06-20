@@ -8,6 +8,38 @@
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
+### v1.1.8
+- Add the Dto / Viewmodel apply for the result in order to filter your result
+```javascript
+const FakeCommand2 = class {
+    static get pin() {
+        return 'cmd:myCommand2';
+    }
+
+    static get name() {
+        return 'myCommand2';
+    }
+
+    static get dtoType() {
+        return 'MyDto';
+    }
+
+    static get dtoSubType() {
+        return '';
+    }
+
+    static get dtoResultType(){
+        return 'YourViewModel';
+    }
+
+    static get dtoResultSubType(){
+        return 'YourViewModel';
+    }
+
+    func() {
+        return null;
+    }
+};
 ### v1.1.7
 - Fix bug SenecaLoaderService throw exception because load fire-and-forget 2 times
 ### v1.1.5

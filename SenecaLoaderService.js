@@ -55,7 +55,9 @@ class SenecaLoaderService {
             const CommandClass = args[1];
             const serviceInstance = new CommandClass();
 
-            this.seneca.add(MergePin(this.config.pin, args[0]), CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance), CommandClass.dtoType, CommandClass.dtoSubType));
+            const finalPin = MergePin(this.config.pin, args[0]);
+
+            this.seneca.add.call(this.seneca, finalPin, CommandWrapper(args[2], serviceInstance.func.bind(serviceInstance), CommandClass.dtoType, CommandClass.dtoSubType, CommandClass.dtoResultType, CommandClass.dtoResultSubType));
             this.logger.info(`Loaded command ${args[2]}`);
 
             return true;
