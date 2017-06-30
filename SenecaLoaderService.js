@@ -35,20 +35,18 @@ class SenecaLoaderService {
     }
 
     loadCommand(...args) {
-        if (
-            args.length === 1
+        if (args.length === 1 && Object.prototype.hasOwnProperty.call(args[0], 'pin')) {
+            if (Object.prototype.hasOwnProperty.call(args[0], 'Func')
             && typeof args[0] === 'object'
-            && Object.prototype.hasOwnProperty.call(args[0], 'pin')
-            && Object.prototype.hasOwnProperty.call(args[0], 'Func')
             && typeof (args[0].Func) === 'function') {
-            return this.loadCommand(args[0].pin, args[0].Func, args[0].name);
-        }
-        else if (
-            args.length === 1
+                return this.loadCommand(args[0].pin, args[0].Func, args[0].name);
+            }
+            else if (
+                Object.prototype.hasOwnProperty.call(args[0], 'name')
             && typeof args[0] === 'function'
-            && Object.prototype.hasOwnProperty.call(args[0], 'pin')
-            && Object.prototype.hasOwnProperty.call(args[0], 'name')) {
-            return this.loadCommand(args[0].pin, args[0], args[0].name);
+            ) {
+                return this.loadCommand(args[0].pin, args[0], args[0].name);
+            }
         }
         else if (args.length === 3 && typeof args[1] === 'function') {
             // pin, commandClass, cmdName
