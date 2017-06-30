@@ -8,6 +8,9 @@
 > Seneca Service Loader to help you easily buiild seneca service
 
 ## Change logs
+### v1.1.9
+- Add jsonic config to help easier to trace log the services
+
 ### v1.1.8
 - Add the Dto / Viewmodel apply for the result in order to filter your result
 ```javascript
@@ -40,14 +43,20 @@ const FakeCommand2 = class {
         return null;
     }
 };
+```
+
 ### v1.1.7
 - Fix bug SenecaLoaderService throw exception because load fire-and-forget 2 times
+
 ### v1.1.5
 - Fix bug: get clientAsync got no response because the seneca queue still full
+
 ### v1.1.1
 - Fix bug: when you dont listen but you spaw a client, your client never get promisify
+
 ### v1.1.0
 - Fix bug: register seneca command without the server listen pin config.
+
 ### v1.0.6
 - Add new way to declare the command
 ```javascript
