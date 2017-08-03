@@ -55,10 +55,6 @@
             }
         ]
     },
-    "indent": [
-        "error",
-        2
-    ],
     "env": {
         "mocha": true,
         "node": true,
